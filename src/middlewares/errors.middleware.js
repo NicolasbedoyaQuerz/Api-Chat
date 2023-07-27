@@ -1,5 +1,5 @@
 const {
-    validationError,
+    ValidationError,
     DatabaseError,
     ConnectionError,
     ConnectionTimedOutError,
