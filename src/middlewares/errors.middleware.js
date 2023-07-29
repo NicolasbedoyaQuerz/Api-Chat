@@ -54,7 +54,7 @@ const notFoundErrorHandler = (req, res) => {
     res.status(404).json({
         error: "Not found",
         message:
-          "El backend anda lento y no tiene esta ruta por ahora, vuelva más tarde",
+          "El backend esta trabajando y  no puede responder ahora, vuelva más tarde",
       });
 }
 
