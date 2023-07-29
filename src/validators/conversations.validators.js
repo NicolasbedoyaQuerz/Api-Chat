@@ -16,6 +16,15 @@ const conversationValidator = [
     validateResult
   ];
 
+  const messageValidator = [
+    check('content', 'error con el mesaje')
+    .exists()
+    .withMessage('debes crear un mensaje')
+    .notEmpty()
+    .withMessage('el mensaje no puede estar vacia'),
+    validateResult
+  ];
 module.exports = {
-    conversationValidator
+    conversationValidator,
+    messageValidator
 }

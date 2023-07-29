@@ -1,14 +1,15 @@
 const { Router } = require('express');
-const { createConversation, getAllConversationByUsers, getAllConversationByParticipants, deleteConversation } = require('../controllers/conversations.controllers');
+const { createConversation, getAllConversationByUsers, getAllConversationByParticipants, deleteConversation, createMessage } = require('../controllers/conversations.controllers');
 const authenticate = require("../middlewares/auth.middleware");
-const { conversationValidator } = require('../validators/conversations.validators');
+const { conversationValidator, messageValidator } = require('../validators/conversations.validators');
 
 
 const router = Router();
 
-router.post('/conversations', conversationValidator, createConversation);
-router.get('/conversations',  getAllConversationByUsers);
-router.get('/conversations/:id', getAllConversationByParticipants)
-router.delete('/conversations/:id', deleteConversation);
+router.post('/conversations',authenticate, conversationValidator, createConversation);
+router.get('/conversations',authenticate,  getAllConversationByUsers);
+router.get('/conversations/:id',authenticate, getAllConversationByParticipants)
+router.delete('/conversations/:id', authenticate, deleteConversation);
+router.post('/message',authenticate, messageValidator, createMessage);
 
 module.exports = router;

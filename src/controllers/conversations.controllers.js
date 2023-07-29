@@ -1,4 +1,4 @@
-const { Conversations, Participants, Users, Messages } = require("../models");
+const { Conversations, Participants, Messages } = require("../models");
 
 const createConversation = async (req, res, next) => {
     try {
@@ -22,9 +22,9 @@ const createConversation = async (req, res, next) => {
 
 const getAllConversationByUsers = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const conversation = await Conversations.findAll({
-      where: {id}
+    const {createdBy} = req.params;
+    const conversation = await Conversations.findByPk({
+      where: { createdBy}
     });
     res.json(conversation)
   } catch (error) {
@@ -40,6 +40,17 @@ const getAllConversationByParticipants = async (req, res, next) => {
       include: Participants, Messages
     });
     res.json(conversation)
+  } catch (error) {
+    next(error)
+  }
+}
+
+const createMessage = async (req, res, next) => {
+  try {
+    const newMessage = req.body;
+    const message = await Messages.create(newMessage);
+
+    res.status(201).json(message);
   } catch (error) {
     next(error)
   }
@@ -61,4 +72,5 @@ module.exports = {
   getAllConversationByUsers,
   getAllConversationByParticipants,
   deleteConversation,
+  createMessage
 };
