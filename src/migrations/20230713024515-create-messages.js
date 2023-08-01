@@ -15,7 +15,8 @@ module.exports = {
         references: {
           model: 'Conversations',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       content: {
         type: Sequelize.TEXT,

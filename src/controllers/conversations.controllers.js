@@ -22,10 +22,7 @@ const createConversation = async (req, res, next) => {
 
 const getAllConversationByUsers = async (req, res, next) => {
   try {
-    const {createdBy} = req.params;
-    const conversationByUser = await Conversations.findByPk({
-      where: { createdBy}
-    });
+    const conversationByUser = await Conversations.findAll();
     res.json(conversationByUser)
   } catch (error) {
     next(error)

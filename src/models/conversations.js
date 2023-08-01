@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Conversations.hasMany(models.Messages, {foreignKey: 'conversationId'});
+      Conversations.hasMany(models.Messages, {onDelete: "CASCADE",foreignKey: 'conversationId'});
       Conversations.hasMany(models.Participants, {onDelete: "CASCADE", foreignKey: 'conversationId'});
       Conversations.belongsTo(models.Users, {foreignKey: 'createdBy'});
     }
