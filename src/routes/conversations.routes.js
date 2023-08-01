@@ -7,7 +7,7 @@ const { conversationValidator, messageValidator } = require('../validators/conve
 const router = Router();
 
 router.post('/conversations',authenticate, conversationValidator, createConversation);
-router.get('/conversations',authenticate,  getAllConversationByUsers);
+router.get('/conversations/:id',authenticate,  getAllConversationByUsers);
 router.get('/conversations/participants/:id',authenticate, getAllConversationByParticipants)
 router.delete('/conversations/:id', authenticate, deleteConversation);
 router.post('/message',authenticate, messageValidator, createMessage);
