@@ -9,7 +9,7 @@ const router = Router();
 router.post('/conversations',authenticate, conversationValidator, createConversation);
 router.get('/conversations',authenticate,  getAllConversationByUsers);
 router.get('/conversations/:id',authenticate, getAllConversationByParticipants)
-router.delete('/conversations/participants:id', authenticate, deleteConversation);
+router.delete('/conversations/participants/:id', authenticate, deleteConversation);
 router.post('/message',authenticate, messageValidator, createMessage);
 
 module.exports = router;
