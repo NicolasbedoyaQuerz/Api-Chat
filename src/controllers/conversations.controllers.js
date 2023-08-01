@@ -23,10 +23,10 @@ const createConversation = async (req, res, next) => {
 const getAllConversationByUsers = async (req, res, next) => {
   try {
     const {createdBy} = req.params;
-    const conversation = await Conversations.findByPk({
+    const conversationByUser = await Conversations.findByPk({
       where: { createdBy}
     });
-    res.json(conversation)
+    res.json(conversationByUser)
   } catch (error) {
     next(error)
   }
@@ -35,11 +35,18 @@ const getAllConversationByUsers = async (req, res, next) => {
 const getAllConversationByParticipants = async (req, res, next) => {
   try {
     const {id} = req.params;
-    const conversation = await Conversations.findAll({
+    const conversationByParticipants = await Conversations.findAll({
       where: {id},
-      include: Participants, Messages
+      include: [
+        {
+          model: Participants
+        },
+        {
+          model: Messages
+        }
+      ]
     });
-    res.json(conversation)
+    res.json(conversationByParticipants)
   } catch (error) {
     next(error)
   }
